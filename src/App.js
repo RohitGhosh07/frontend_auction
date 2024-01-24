@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Navbar from './components/NavBar';
+import PlayerForm from './components/PlayerForm';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <Navbar />
+
+      <div className="pl-60 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url("https://i.ibb.co/KFvWZc6/Untitled-design-1.png")' }}>
+        <PlayerForm />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
