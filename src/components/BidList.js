@@ -9,7 +9,7 @@ const BidList = ({ players }) => {
   }, {});
 
   return (
-    <div className="flex flex-wrap h-screen overflow-x-auto items-center justify-center mr-2 gap-x-2">
+    <div className="flex flex-wrap h-screen overflow-x-auto scrollbar  scrollbar-thumb-gray-900 scrollbar-track-gray-100 items-center justify-center mx-auto gap-x-2 rounded">
       {Object.entries(playersByTeam).map(([team, teamPlayers]) => (
         <div key={team} className="w-[300px] rounded-xl border border-gray-200 bg-white py-4 px-2 shadow-md shadow-gray-100">
           <div className="flex items-center justify-between px-2 text-base font-medium text-gray-700">

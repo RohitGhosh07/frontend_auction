@@ -7,7 +7,8 @@ const Login = () => {
         username: '',
         password: '',
     });
-
+    const uname = localStorage.getItem('username');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -17,55 +18,36 @@ const Login = () => {
         });
     };
 
-    
-
-
     const handleLogin = async (e) => {
         e.preventDefault();
-    
-        try {
-          // Make a GET request to your API endpoint
-          const response = await axios.get('http://localhost:5000/api/auth/users');
-    
-          // Define the expected structure of the response
-          const expectedStructure = [
-            {
-              "_id": "",
-              "username": "",
-              "password": "",
-              "__v": 0
-            }
-          ];
-    
-          // Check if the response data matches the expected structure
-          if (
-            Array.isArray(response.data) &&
-            response.data.length > 0 &&
-            response.data.every((item) =>
-              Object.keys(item).every(
-                (key) => expectedStructure[0][key] !== undefined
-              )
-            )
-          ) {
-            // The response data matches the expected structure
-            console.log('Login successful!');
-    
-            // Navigate to another page (replace '/dashboard' with your desired route)
-            navigate('/hero');
-          } else {
-            // The response data does not match the expected structure
-            console.error('Login failed: Unexpected response format');
-            // Display an error message to the user
-          }
-        } catch (error) {
-          // Handle request failure
-          console.error(
-            'Login failed:',
-            error.response ? error.response.data : error.message
-          );
-          // Display an error message to the user
+
+        if (!loginData.username || !loginData.password) {
+            setErrorMessage('Username and password are required.');
+            return;
         }
-      };
+
+        try {
+            const response = await axios.get('http://localhost:5000/api/auth/users');
+            const users = response.data;
+
+            const matchingUser = users.find(
+                (user) => user.username === loginData.username && user.password === loginData.password
+            );
+
+            if (matchingUser) {
+                setErrorMessage('');
+                console.log('Login successful!');
+                navigate('/hero');
+                window.localStorage.setItem('username', loginData.username);
+            } else {
+                setErrorMessage('Invalid username or password.');
+            }
+        } catch (error) {
+            console.error('Login failed:', error.response ? error.response.data : error.message);
+            setErrorMessage('An error occurred during login.');
+        }
+    };
+
 
     return (
         <section className="flex flex-col md:flex-row h-screen items-center">
@@ -84,7 +66,7 @@ const Login = () => {
                     </h1>
 
                     <form className="mt-6" action="#" method="POST">
-                        {/* <div>
+                        <div>
                             <label className="block text-gray-700">League ID</label>
                             <input
                                 type="text"
@@ -95,17 +77,20 @@ const Login = () => {
                                 autoFocus
                                 autoComplete="required"
                             />
-                        </div> */}
+                        </div>
                         <div>
                             <label className="block text-gray-700">Username</label>
                             <input
                                 type="text"
                                 name="username"
                                 id="username"
-                                placeholder="Enter Username"
+                                placeholder={uname}
                                 className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                                 autoFocus
                                 autoComplete="required"
+                                value={loginData.username}
+                                onChange={handleChange}
+                                // defaultValue={uname}
                             />
                         </div>
 
@@ -119,7 +104,10 @@ const Login = () => {
                                 minLength=""
                                 className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                                 required
+                                value={loginData.password}
+                                onChange={handleChange}
                             />
+
                         </div>
 
                         {/* <div className="text-right mt-2">
@@ -132,7 +120,7 @@ const Login = () => {
                         </div> */}
 
                         <button
-                            type="button"  
+                            type="button"
                             onClick={handleLogin}
                             className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
                         >
@@ -140,6 +128,11 @@ const Login = () => {
                         </button>
 
                     </form>
+                    {errorMessage && (
+                        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white p-4 rounded-md shadow-lg">
+                            {errorMessage}
+                        </div>
+                    )}
 
                     <hr className="my-6 border-gray-300 w-full" />
 

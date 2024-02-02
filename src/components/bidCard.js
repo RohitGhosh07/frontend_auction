@@ -7,6 +7,7 @@ const BidCard = () => {
   const [soldPlayersCount, setSoldPlayersCount] = useState(0);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   const dropdownRef = useRef(null);
 
@@ -37,10 +38,10 @@ const BidCard = () => {
     setSelectedTeam(team);
     setIsDropdownOpen(false);
 
-    
-};
 
-  
+  };
+
+
 
   const handleToggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -68,108 +69,29 @@ const BidCard = () => {
 
   return (
     <div>
-      {/* Suggestions card */}
-      <div className="flex flex-wrap mb-2">
-        {/* Card 1: Amount left dropdown */}
-        <div className="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pr-2">
-          <div className="bg-green-600 border rounded shadow p-2">
-            <div className="flex flex-row items-center">
-              <div className="flex-shrink pl-1 pr-4">
-                <i className="fa fa-wallet fa-2x fa-fw fa-inverse"></i>
+      <div class="min-w-screen min-h-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
+        <div class="w-full max-w-6xl rounded  shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
+          <div class="md:flex items-center -mx-10">
+            <div class="w-full md:w-1/2 px-10 mb-10 md:mb-0">
+              <div class="relative">
+                <img src={selectedPlayer.team} class="w-full relative z-10" alt="" />
+                <div class="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
               </div>
-              <div className="flex-1 text-right">
-                <h5 className="text-white">Amount left</h5>
-                <div className="relative inline-block text-left" ref={dropdownRef}>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={handleToggleDropdown}
-                      className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
-                      id="options-menu"
-                      aria-haspopup="true"
-                      aria-expanded="true"
-                    >
-                      {selectedTeam ? selectedTeam.name : 'Select Team'}
-                      <svg
-                        className="-mr-1 ml-2 h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 11.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Dropdown menu */}
-                  {isDropdownOpen && (
-                    <div
-                      className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      <div className="py-1" role="none">
-                        {teams.map((team) => (
-                          <button
-                            key={team._id}
-                            onClick={() => handleTeamSelect(team)}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                            role="menuitem"
-                          >
-                            {team.name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+            </div>
+            <div class="w-full md:w-1/2 px-10">
+              <div class="mb-10">
+                <h1 class="font-bold uppercase text-2xl mb-5">Mens's Ragged Waterproof Jacket</h1>
+                <p class="text-sm">Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Eos, voluptatum dolorum! Laborum blanditiis consequatur, voluptates, sint enim fugiat saepe, dolor fugit, magnam explicabo eaque quas id quo porro dolorum facilis... <a href="#" class="opacity-50 text-gray-900 hover:opacity-100 inline-block text-xs leading-none border-b border-gray-900">MORE <i class="mdi mdi-arrow-right"></i></a></p>
+              </div>
+              <div>
+                <div class="inline-block align-bottom mr-5">
+                  <span class="text-2xl leading-none align-baseline">$</span>
+                  <span class="font-bold text-5xl leading-none align-baseline">59</span>
+                  <span class="text-2xl leading-none align-baseline">.99</span>
                 </div>
-                <h3 className="text-white text-3xl">
-                  {calculateAmountLeft() !== null ? (
-                    <>
-                      {calculateAmountLeft()}
-                      <span className="text-green-400">
-                        <i className="fas fa-caret-down"></i>
-                      </span>
-                    </>
-                  ) : (
-                    'N/A'
-                  )}
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-       {/* Card 2: Total Unsold Players */}
-       <div className="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pl-2">
-          <div className="bg-blue-600 border rounded shadow p-2">
-            <div className="flex flex-row items-center">
-              <div className="flex-shrink pl-1 pr-4">
-                <i className="fas fa-users fa-2x fa-fw fa-inverse"></i>
-              </div>
-              <div className="flex-1 text-right">
-                <h5 className="text-white">Total Unsold Players</h5>
-                <h3 className="text-white text-3xl">{unsoldPlayersCount} <span className="text-blue-400"></span></h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3: Total Sold Players */}
-        <div className="w-full md:w-1/2 xl:w-1/3 pt-3 px-3 md:pr-2 xl:pr-3 xl:pl-1">
-          <div className="bg-orange-600 border rounded shadow p-2">
-            <div className="flex flex-row items-center">
-              <div className="flex-shrink pl-1 pr-4">
-                <i className="fas fa-user-plus fa-2x fa-fw fa-inverse"></i>
-              </div>
-              <div className="flex-1 text-right pr-1">
-                <h5 className="text-white">Total Sold Players</h5>
-                <h3 className="text-white text-3xl">{soldPlayersCount} <span className="text-orange-400"></span></h3>
+                <div class="inline-block align-bottom">
+                  <button class="bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold"><i class="mdi mdi-cart -ml-2 mr-2"></i> BUY NOW</button>
+                </div>
               </div>
             </div>
           </div>

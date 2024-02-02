@@ -9,6 +9,7 @@ import PlayerForm from './components/PlayerForm';
 import Card from './components/detailCard';
 import Register from './components/Register';
 import AuctionPage from './components/PlayerForm';
+import BidCard from './components/bidCard';
 
 const App = () => {
   return (
@@ -21,16 +22,19 @@ const App = () => {
           element={
             <PrivateRoute>
               <Outlet />
-              <Hero  />
+              {/* <BidCard /> */}
               <AuctionPage />
-              <Footer />
+              <Hero  />
+              
+              <NavigationMenu />
+              {/* <Footer /> */}
             </PrivateRoute>
           }
         />
         
         <Route path="/*" element={<Navigate to="/login" />} />
       </Routes>
-      <NavigationMenu />
+      
       {/* <Login />
       <Hero />
       <PlayerForm />

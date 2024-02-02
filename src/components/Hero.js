@@ -26,10 +26,10 @@ const Hero = () => {
         width: '100%',
         height: '100%',
         zIndex: -1,
-        backgroundImage: 'url("https://sportskhabri.com/wp-content/uploads/2023/10/Kit-Sponsors-of-ISL-teams-202324.jpg")',
+        backgroundImage: 'url("https://c4.wallpaperflare.com/wallpaper/813/919/736/stadium-arena-lighting-football-wallpaper-preview.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        filter: 'brightness(70%)', // Adjust the brightness to your preference
+        filter: 'brightness(50%)', // Adjust the brightness to your preference
     };
 
     const containerStyle = {
@@ -43,6 +43,7 @@ const Hero = () => {
         overflowX: 'auto',    // Add horizontal scroll
         flex: '1',             // Takes 1/3 of the available space
         marginRight: '5px',    // Adjust spacing between BidList and Card
+        
     };
     
     
@@ -52,7 +53,7 @@ const Hero = () => {
     return (
         <div  id="about">
             <div style={imageStyle}></div>
-            <h1 className="text-4xl text-white flex justify-center mt-7 font-bold mb-4 uppercase tracking-wider">Statistics</h1>
+            <h1 className="text-4xl text-white flex justify-center mt-7 font-bold mb-4 uppercase tracking-wider bg-slate-100 bg-opacity-20 backdrop-blur-md rounded-md shadow-md">Statistics</h1>
             <section id="about" style={containerStyle}>
                 <div style={bidListContainerStyle}>
                     {/* Pass the players prop to BidList */}
@@ -61,6 +62,7 @@ const Hero = () => {
 
             </section>
         </div>
+        
     );
 };
 
