@@ -29,7 +29,7 @@ const Hero = () => {
         backgroundImage: 'url("https://c4.wallpaperflare.com/wallpaper/813/919/736/stadium-arena-lighting-football-wallpaper-preview.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        filter: 'brightness(50%)', // Adjust the brightness to your preference
+        filter: 'brightness(10%)', // Adjust the brightness to your preference
     };
 
     const containerStyle = {
@@ -53,8 +53,8 @@ const Hero = () => {
     return (
         <div  id="about">
             <div style={imageStyle}></div>
-            <h1 className="text-4xl text-white flex justify-center mt-7 font-bold mb-4 uppercase tracking-wider bg-slate-100 bg-opacity-20 backdrop-blur-md rounded-md shadow-md">Statistics</h1>
-            <section id="about" style={containerStyle}>
+            <h1 className="text-4xl text-white flex justify-center mt-7 font-bold mb-4 uppercase tracking-wider bg-slate-100 bg-opacity-20 backdrop-blur-md rounded-md shadow-md" id="bidlist">Tables</h1>
+            <section id="tables" style={containerStyle}>
                 <div style={bidListContainerStyle}>
                     {/* Pass the players prop to BidList */}
                     <BidList players={players} />

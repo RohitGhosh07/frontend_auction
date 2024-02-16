@@ -6,6 +6,7 @@ const Login = () => {
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
+   
     });
     const uname = localStorage.getItem('username');
     const [errorMessage, setErrorMessage] = useState('');
@@ -31,7 +32,7 @@ const Login = () => {
             const users = response.data;
 
             const matchingUser = users.find(
-                (user) => user.username === loginData.username && user.password === loginData.password
+                (user) => user.username === loginData.username && user.password === loginData.password 
             );
 
             if (matchingUser) {
@@ -53,7 +54,7 @@ const Login = () => {
         <section className="flex flex-col md:flex-row h-screen items-center">
             <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
                 <img
-                    src="https://www.indiansuperleague.com/static-assets/waf-images/56/0f/bb/16-9/xgHMzFewxL.png?v=100.38&w=1200"
+                    src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt=""
                     className="w-full h-full object-cover"
                 />
@@ -62,22 +63,24 @@ const Login = () => {
             <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
                 <div className="w-full h-100">
                     <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12" onSubmit={handleLogin}>
-                        Log in to your account
+                        Log in to your Bidding Area✨
                     </h1>
 
                     <form className="mt-6" action="#" method="POST">
-                        <div>
+                        {/* <div>
                             <label className="block text-gray-700">League ID</label>
                             <input
                                 type="text"
-                                name="leagueId"
-                                id="leagueId"
+                                name="leagueid"
+                                id="leagueid"
                                 placeholder="Enter League ID"
                                 className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                                 autoFocus
                                 autoComplete="required"
+                                value={loginData.leagueid}
+                                onChange={handleChange}
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <label className="block text-gray-700">Username</label>
                             <input
@@ -90,7 +93,7 @@ const Login = () => {
                                 autoComplete="required"
                                 value={loginData.username}
                                 onChange={handleChange}
-                                // defaultValue={uname}
+                            // defaultValue={uname}
                             />
                         </div>
 
